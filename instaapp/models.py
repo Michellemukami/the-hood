@@ -1,35 +1,97 @@
 from django.db import models
 from django.contrib.auth.models import User
-from tinymce.models import HTMLField
 
+class Location(models.Model):
+    name = models.CharField(max_length = 30)
 
-class Profile(models.Model): 
-    profile_image = models.ImageField(upload_to = 'profile/', blank=True)
-    username = models.CharField(max_length =60,primary_key=True)
-    gender = models.CharField(max_length =60)
-    bio = HTMLField()
-    user_id = models.IntegerField(default=0)
-class Image(models.Model):
-    image_name = models.CharField(max_length =60)
-    image_caption = HTMLField()
-    profile = models.ForeignKey(User,on_delete=models.CASCADE, null=False,default=1)
-    like = models.IntegerField(null=True)
-    insta_image = models.ImageField(upload_to = 'pixels/', blank=True)
-    
     def __str__(self):
-        return self.image_name
-    def save_Image(self):
+        return self.name
+
+class NeighbourHood(models.Model):
+    name = models.CharField(max_length = 30)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    occupants = models.IntegerField(null=True, default=0)
+
+    def __str__(self):
+        return self.name
+
+    def create_neighborhood(self):
         self.save()
 
-    def delete_Image(self):
+    def delete_neighborhood(self):
         self.delete()
-   
-    def update_Caption(self):
-        self.update()
+
     @classmethod
-    def photo_url(self):
-        if self.insta_image and hasattr(self.insta_image, 'url'):
-            return self.photo.url
-class NewsLetterRecipients(models.Model):
+    def find_neighborhood(cls,neigborhood_id):
+        neighborhood = cls.objects.get(id = neigborhood_id)
+        return neighborhood
+
+    def update_neighborhood(self):
+        self.save()
+
+    def update_occupants(self):
+        self.occupants += 1
+        self.save()
+
+class UserProfile(models.Model):
     name = models.CharField(max_length = 30)
-    email = models.EmailField()
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    bio = models.TextField(null=True)
+    email = models.EmailField(max_length = 60, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class Business(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField(max_length = 30)
+    description = models.TextField(null=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def find_business(cls,business_id):
+        business = Business.objects.get(id = business_id)
+        return business
+
+    def update_business(self):
+        self.save()
+
+class Post(models.Model):
+    hood_image = models.ImageField(upload_to = 'hood/', blank=True)
+    title = models.CharField(max_length = 50)
+    content = models.TextField()
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    neighbourhood = models.ForeignKey(NeighbourHood,on_delete = models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True,null=True)
+
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    comment = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True,null=True)
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        ordering = ['-pub_date']
+
+class Category(models.Model):
+    name = models.CharField(max_length = 30)
+
+    def __str__(self):
+        return self.name

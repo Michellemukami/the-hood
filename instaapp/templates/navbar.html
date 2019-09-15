@@ -1,51 +1,57 @@
-
-
-
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Instagram</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-       <span class="navbar-toggler-icon"></span>                        
-      </button>
-      <li><a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-camera-retro"></i> | Instakami</a></li>
-    </div>
-    <div class="dropdown-toggle"id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="{% url 'home' %}">Home</a></li>
+<link href="https://fonts.googleapis.com/css?family=Lobster+Two|Nunito&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lobster+Two|Nunito&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gentium+Basic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gentium+Basic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Lobster+Two|Nunito&display=swap" rel="stylesheet">
+<nav class="navbar navbar-expand-md mb-3">
+  <div class="container">
+      <img src="https://render.bitstrips.com/v2/cpanel/78048204-cb40-44e7-ace4-a0064c4af63f-59ab9e42-9b93-447e-8df9-86fcc8b30a84-v1.png?transparent=1&palette=1"style="width:5%;   display: block;
         
-              {% if user.is_authenticated %}
+      margin-right: auto;
+      border-radius: 50%;height: 5%;">
+      <a href="{% url 'index' %}" class="navbar-brand">The Hood</a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#menu">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+         
+          {% if user.is_authenticated %}
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+  
+              </li>
+              <li class="nav-item">
+                  <a href="{% url 'business' %}" class="nav-link">Bizz</a>
+              </li>
+              <li class="nav-item">
+                  <a href="{% url 'profile' user %}" class="nav-link">Profile</a>
+              </li>
+              <li class="nav-item">
+                  <a href="{% url 'edit_profile' user %}" class="nav-link">Edit Profile</a>
+                  </li>
+              <li class="nav-item">
+                  <a href="/logout" class="nav-link">Logout</a>
+              </li>
+             
               
-            <li><a href="{% url 'new-article' %}">New post</a></li>
-            <li><a href="{% url 'profile'%}">Update profile</a></li>
-            <li><a href="{% url 'user'%}">View profile</a></li>
-            <li><a href="/accounts/password/change">change password</a></li>
-            <li><a href="/logout">Logout</a></li>
           </ul>
           {% else %}
-                <li><a class='btn btn-default' href="/accounts/login">Login</a></li>
-                
-              
-                {% endif %}
-              </div>
-      <div class="nav navbar-nav navbar-right">
-        <form class="form-inline" action="{% url 'search_results' %}">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-    
-    </div>
-    <style>li a{color:black} </style>
-    </nav>
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a href="/accounts/login" class="nav-link">Login</a>
+              </li>
+              <li class="nav-item">
+                  <a href="/accounts/register" class="nav-link">Register</a>
+              </li>
+          </ul>
+          {% endif %}
+      </div>
+  </div>
+</nav>
+
+<style>
+nav{
+  font-family: 'Kaushan Script';
+  background-color: #e2b08c
+}</style>

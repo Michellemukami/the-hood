@@ -1,24 +1,27 @@
-
-
 from django import forms
-from .models import Image, Profile
+from .models import UserProfile, Business, NeighbourHood, Post, Comment
 
-class NewArticleForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
-        model = Image
-        exclude = ['editor','like','profile']
-        widgets = {
-            'vote': forms.CheckboxSelectMultiple(),
-        }
-class NewsLetterForm(forms.Form):
-    your_name = forms.CharField(label='First Name',max_length=30)
-    email = forms.EmailField(label='Email')
-class CommentForm(forms.Form):
-    Comment = forms.CharField(label='comment',max_length=100)
+        model = UserProfile
+        exclude = ['user']
 
-class NewsProfileForm(forms.ModelForm):
-     class Meta:
-        model = Profile
-        exclude = ['user_id']
-    
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ['user', 'neighbourhood']
 
+class NeighbourHoodForm(forms.ModelForm):
+    class Meta:
+        model = NeighbourHood
+        fields = ('name', 'location', 'occupants')
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ['user', 'neighbourhood']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('comment',)

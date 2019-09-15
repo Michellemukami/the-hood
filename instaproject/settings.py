@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'instaapp.apps.InstaappConfig',
+    'django.contrib.humanize',
     'tinymce',
-    'bootstrap3',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -140,5 +141,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Email configurations remember to install python-decouple
 
-LOGIN_REDIRECT_URL= '/new/profile'
+LOGIN_REDIRECT_URL= '/edit_profile/'
 django_heroku.settings(locals())

@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Image,Profile
-# Register your models here.
+from .models import NeighbourHood, UserProfile, Business, Location, Post, Comment
 
-class ImageAdmin(admin.ModelAdmin):
-   
-
-    admin.site.register(Image)
-    admin.site.register(Profile)
+admin.site.register(NeighbourHood)
+admin.site.register(UserProfile)
+admin.site.register(Business)
+admin.site.register(Location)
+admin.site.register(Post)
+admin.site.register(Comment)
