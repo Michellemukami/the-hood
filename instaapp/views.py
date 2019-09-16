@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Business, UserProfile, NeighbourHood, Post, Comment
-from .forms import ProfileForm, BusinessForm, NeighbourHoodForm, PostForm, CommentForm
+from .models import Business, UserProfile, NeighbourHood, Post
+from .forms import ProfileForm, BusinessForm, NeighbourHoodForm, PostForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -74,7 +74,7 @@ def post(request, id):
 @login_required(login_url='/accounts/login')
 def profile(request, username):
     user = User.objects.get(username = username)
-    profile = UserProfile.objects.get(user = user)
+    profile = UserProfile.objects.get(user = request.user)
     businesses = Business.objects.filter(user = profile)
     context = {
         'profile': profile,
