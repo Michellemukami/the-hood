@@ -2,7 +2,7 @@ from django.test import TestCase
 from .models import Image, Location, Category
 # Create your tests here.
 
-class ImageTestClass(TestCase):
+class PostTestClass(TestCase):
     def setUp(self):
         '''Creating a new location and saving it'''
         self.loc1=Location(location="Mombasa")
@@ -55,7 +55,7 @@ class LocationTestClass(TestCase):
         locations=Location.objects.all()
         self.assertTrue(len(locations)>0)
 
-class CategoryTestClass(TestCase):
+class ProfileTestClass(TestCase):
     def setUp(self):
         self.cat1=Category(category="food")
 
