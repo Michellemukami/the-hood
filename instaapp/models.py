@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-class Location(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length = 30)
 
     def __str__(self):
@@ -32,16 +31,6 @@ class NeighbourHood(models.Model):
     def update_occupants(self):
         self.occupants += 1
         self.save()
-
-class UserProfile(models.Model):
-    name = models.CharField(max_length = 30)
-    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
-    bio = models.TextField(null=True)
-    email = models.EmailField(max_length = 60, null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
 
 class Business(models.Model):
     name = models.CharField(max_length = 30)
@@ -78,10 +67,20 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
-
-class Category(models.Model):
+class Location(models.Model):
     name = models.CharField(max_length = 30)
+
+    def __str__(self):
+        return self.name
+
+
+
+class UserProfile(models.Model):
+    name = models.CharField(max_length = 30)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    bio = models.TextField(null=True)
+    email = models.EmailField(max_length = 60, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
