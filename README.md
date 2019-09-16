@@ -45,7 +45,6 @@ NO known Bugs.
 * WhiteNoise
 * Django
 * PostgreSQL Database
-
 * CSS
 
 ### Support and contact details
