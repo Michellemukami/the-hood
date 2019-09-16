@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-    <div class="container"style="overflow-y:scroll;height: 90vh;margin-top: 90px;">
-            <div class="text-center">
-                    <h1>Businesses in your hood</h1>
-                </div>
-            <a href="{% url 'new_business' %}" class="btn btn-primary">New Business?</a>
+    <div class="container">
+           
         {% if businesses %}
-   
+        <div class="text-center">
+                <h1>Bizz in the hood!!</h1>
+            </div>
                 
                     {% for business in businesses %}
                    
@@ -15,9 +14,9 @@
                                 <div class="card">
                                     
                                     <div class="card-body">
-                                        <h2 class="card-title">{{business.name}}</h2>
-                                        <p class="card-text">{{business.description}}</p>
-                                        <p class="card-text">{{business.user}}</p>
+                                            Name:<h2 class="card-title">{{business.name}}</h2>
+                                            Description:<p class="card-text">{{business.description}}</p>
+                                            Owner:<p class="card-text">{{business.user}}</p>
                             
                                     </div>
                                 </div>
@@ -27,7 +26,7 @@
             </table>
         </div>
         {% else%}
-        <h1 class="text-center">No business available.</h1>
+        <h1 class="text-center">No business.</h1>
         {% endif%}
        
     </div>

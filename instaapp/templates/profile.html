@@ -2,12 +2,31 @@
 {% block content %}
     <div class="container">
         {% if profile.user == user %}
-        <h1 class="text-center my-4">Your posted Bizz</h1>
+        <h1 class="text-center my-4">Profile details</h1>
         {% else %}
         <h1 class="text-center my-4">{{profile.name}}'s Businesses</h1>
         {% endif%}
+        {% if profile.user == user %}
+                   
+        <div class="col-md-6">
+                <div class="card">
+                    
+                    <div class="card-body">
+                            Name:<h2 class="card-title">{{profile.name}}</h2>
+                            Hood:<p class="card-text">{{profile.neighbourhood}}</p>
+                            Bio:<p class="card-text">{{profile.bio}}</p>
+                            Email:<p class="card-text">{{profile.email}}</p>
+            
+                    </div>
+                </div>
+            </div>
+            {% else %}
+        <h1 >no profile made</h1>
+        {% endif%}
+
        
         {% if businesses %}
+        <h1 class="text-center my-4">Your posted Bizz</h1>
         <div class="row">
             {% for business in businesses %}
             <div class="col-md-4">

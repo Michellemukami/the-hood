@@ -74,7 +74,7 @@ def post(request, id):
 @login_required(login_url='/accounts/login')
 def profile(request, username):
     user = User.objects.get(username = username)
-    profile = UserProfile.objects.get(user = request.user)
+    profile = UserProfile.objects.get(user = user)
     businesses = Business.objects.filter(user = profile)
     context = {
         'profile': profile,
