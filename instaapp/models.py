@@ -78,17 +78,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class Comment(models.Model):
-    comment = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    pub_date = models.DateTimeField(auto_now_add=True,null=True)
 
-    def __str__(self):
-        return self.user.username
-
-    class Meta:
-        ordering = ['-pub_date']
 
 class Category(models.Model):
     name = models.CharField(max_length = 30)
